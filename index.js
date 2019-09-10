@@ -11,18 +11,18 @@ app.get('/', (req, res) => {
 });
 
 const schema = buildSchema(`
-    type Query {
-        hello: String
-    }
+  type Query {
+    hello: String
+  }
 `);
 
-const rootValue = {
+const root = {
   hello: () => 'hello',
 };
 
-app.get('/graphql', graphqlHTTP({
+app.use('/graphql', graphqlHTTP({
   schema,
-  rootValue,
+  rootValue: root,
   graphiql: true,
 }));
 
