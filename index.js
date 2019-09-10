@@ -1,13 +1,13 @@
-const express = require('express');
-const graphqlHTTP = require('express-graphql');
-const { buildSchema } = require('graphql');
+import express from 'express';
+import graphqlHTTP from 'express-graphql';
+import { buildSchema } from 'graphql';
 
 const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
 app.get('/', (req, res) => {
-    res.json({success:"실패!!!!"});
+  res.json({ success: '실패!!!!' });
 });
 
 const schema = buildSchema(`
@@ -17,15 +17,15 @@ const schema = buildSchema(`
 `);
 
 const rootValue = {
-    hello: () => 'hello'
-}
+  hello: () => 'hello',
+};
 
 app.get('/graphql', graphqlHTTP({
-    schema,
-    rootValue,
-    graphiql:true
+  schema,
+  rootValue,
+  graphiql: true,
 }));
 
 app.listen(3000, () => {
-    console.log('listening 3000 port...');
+  console.log('listening 3000 port...');
 });
