@@ -12,13 +12,46 @@ app.get('/', (req, res) => {
 
 const schema = buildSchema(`
   type Query {
-    hello: String
+    users: [User]
+    user(token: String): User
+    }
+
+  type User {
+    id: String
+    name: String
+    token: String
+    achievement: Int
+    activityLog: [String]
+    }
+
+  type Mutation {
+    createUser(name: String!, token: String!): User!
   }
+
 `);
 
 const root = {
-  hello: () => 'hello',
+  hello: () => 'okay',
 };
+
+
+
+const resolver = {
+    users: async (_, args) => {
+        return await dao.cm.getAllUsers();
+    },
+    user: async (_, args) => {
+        const {name} = args;
+    
+        return await dao.cm.getUser(name);
+    },
+    createUser: async (_, args) => {
+        const {id, name, token, achievement=0, activityLog=""} = args;
+    
+        return await dao.cm.joinUser(name, token);
+    },
+};
+
 
 app.use('/graphql', graphqlHTTP({
   schema,
