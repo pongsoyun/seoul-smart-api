@@ -27,13 +27,13 @@ const schema = buildSchema(`
   }
 `);
 
-const root = {
+const rootValue = {
   hello: () => 'hello',
 };
 
 app.use('/graphql', graphqlHTTP({
   schema,
-  rootValue: root,
+  rootValue,
   graphiql: true,
 }));
 
