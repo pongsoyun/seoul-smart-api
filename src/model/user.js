@@ -9,4 +9,4 @@ const User = new Schema({
   activityLog: { type: Array, default: [] },
 });
 
-module.exports = mongoose.model('user', User);
+export default mongoose.model('user', User);

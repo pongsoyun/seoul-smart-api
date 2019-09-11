@@ -2,6 +2,18 @@ import { buildSchema } from 'graphql';
 
 export default buildSchema(`
     type Query {
-    hello: String
+        Users: [User]
+        User(token: String): User
+        }
+
+    type User { 
+        name: String!
+        token: String!
+        achievement: Int
+        activityLog: [String]
+        }
+
+    type Mutation {
+        createUser(name: String!, token: String!): User
     }
 `);
