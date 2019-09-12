@@ -16,7 +16,7 @@ const Location = new Schema({
 
 const Place = new Schema({
   name: String,
-  room: [Room],
+  rooms: [Room],
   location: Location,
   businessHour: String,
   bookLink: String,
