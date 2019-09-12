@@ -41,7 +41,7 @@ export default buildSchema(`
     }
 
     type Day {
-        date: Date
+        date: String
         startTime: String
         progressTime: String
     }
