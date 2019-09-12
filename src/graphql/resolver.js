@@ -5,10 +5,8 @@ async function createUser({ name, token }) {
   return result;
 }
 
-async function signIn ({token}) {
-  //console.log({token});
-  const user = await User.findOne({token});
-  //console.log(user);
+async function signIn({ token }) {
+  const user = await User.findOne({ token });
   return user;
 }
 
