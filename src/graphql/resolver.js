@@ -17,6 +17,11 @@ async function findUser({ _id }) {
   return user;
 }
 
+async function Users( ){
+  const users = await User.find();
+  return users;
+}
+
 async function createActivity({
   name, userId, total, date, startTime, progressTime,
   placeId, room, content, type,
@@ -38,6 +43,7 @@ async function createActivity({
 }
 
 const rootValue = {
+  Users,
   createUser,
   findUser,
   signIn,
