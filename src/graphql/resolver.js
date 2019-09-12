@@ -12,11 +12,16 @@ async function signIn({ token }) {
   return user;
 }
 
+async function findUser({ _id }) {
+  const user = await User.findOne({ _id });
+  return user;
+}
+
 async function createActivity({
   name, userId, total, date, startTime, progressTime,
   placeId, room, content, type,
 }) {
-  const user = await User.findOne({ _id: userId });
+  const user = findUser(userId);
   const place = await Place.findOne({ _id: placeId });
   const day = {
     date,
@@ -32,16 +37,11 @@ async function createActivity({
   return activity;
 }
 
-async function test({ userId }) {
-  const user = await User.findOne({ _id: userId });
-  return user;
-}
-
 const rootValue = {
   createUser,
+  findUser,
   signIn,
   createActivity,
-  test,
 };
 
 export default rootValue;
