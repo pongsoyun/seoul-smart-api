@@ -3,6 +3,11 @@ import Place from '../model/place';
 import Activity from '../model/activity';
 import Program from '../model/program';
 
+async function Users(){
+  const users = await User.find();
+  return users;
+}
+
 async function createUser({ name, token }) {
   const result = await User.create({ name, token });
   return result;
@@ -16,11 +21,6 @@ async function signIn({ token }) {
 async function findUser({ _id }) {
   const user = await User.findOne({ _id });
   return user;
-}
-
-async function Users( ){
-  const users = await User.find();
-  return users;
 }
 
 async function createActivity({
