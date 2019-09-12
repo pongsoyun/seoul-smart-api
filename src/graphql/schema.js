@@ -4,6 +4,7 @@ export default buildSchema(`
     type Query {
         Users: [User]
         User(token: String): User
+        signIn(token: String!): User
         }
 
     type User { 
