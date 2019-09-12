@@ -17,11 +17,7 @@ const app = express();
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.json({ success: '실패!!!!' });
-});
-
-app.use('/graphql', graphqlHTTP({
+app.use('/', graphqlHTTP({
   schema,
   rootValue,
   graphiql: true,
