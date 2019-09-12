@@ -1,6 +1,7 @@
 import User from '../model/user';
 import Place from '../model/place';
 import Activity from '../model/activity';
+import Program from '../model/program';
 
 async function createUser({ name, token }) {
   const result = await User.create({ name, token });
@@ -42,12 +43,24 @@ async function createActivity({
   return activity;
 }
 
+async function getPrograms() {
+  const programs = await Program.find();
+  return programs;
+}
+
+async function getProgram({ _id }) {
+  const program = await Program.findOne({ _id });
+  return program;
+}
+
 const rootValue = {
   Users,
   createUser,
   findUser,
   signIn,
   createActivity,
+  getPrograms,
+  getProgram,
 };
 
 export default rootValue;
