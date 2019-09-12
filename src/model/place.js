@@ -14,7 +14,7 @@ const Location = new Schema({
   gu: String,
 });
 
-const Place = new Schema({
+export const Place = new Schema({
   name: String,
   rooms: [Room],
   location: Location,

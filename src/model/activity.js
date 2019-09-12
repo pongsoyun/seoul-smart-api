@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
-import User from './user';
-import Place from './place';
+import { User } from './user';
+import { Place } from './place';
 
 const { Schema } = mongoose;
 
 const Day = new Schema({
-  date: Date,
+  date: String,
   startTime: String,
   progressTime: String,
 });

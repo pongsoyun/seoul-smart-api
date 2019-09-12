@@ -3,12 +3,13 @@ import { buildSchema } from 'graphql';
 export default buildSchema(`
     type Query {
         Users: [User]
-        User(token: String): User
+        findUser(_id: String!): User
         signIn(token: String!): User
     }
 
     type Mutation {
         createUser(name: String!, token: String!): User
+        createAction(name: String!, userId: String!, total: Int!, date: String, startTime: String, progressTime: String, placeId: String, room: String, content: String, type: String): Activity
     }
 
     type User { 
