@@ -43,12 +43,18 @@ async function getPrograms() {
   return programs;
 }
 
+async function getProgram({ _id }) {
+  const program = await Program.findOne({ _id });
+  return program;
+}
+
 const rootValue = {
   createUser,
   findUser,
   signIn,
   createActivity,
   getPrograms,
+  getProgram,
 };
 
 export default rootValue;

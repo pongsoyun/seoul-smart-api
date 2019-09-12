@@ -6,6 +6,7 @@ export default buildSchema(`
         findUser(_id: String!): User
         signIn(token: String!): User
         getPrograms: [Program]!
+        getProgram(_id: String!): Program!
     }
 
     type Mutation {
