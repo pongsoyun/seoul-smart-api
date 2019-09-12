@@ -5,7 +5,7 @@ export default buildSchema(`
         Users: [User]
         findUser(_id: String!): User
         signIn(token: String!): User
-        getPrograms: [Program]
+        getPrograms: [Program]!
     }
 
     type Mutation {
@@ -72,7 +72,7 @@ export default buildSchema(`
 
     type Program {
         title: String!
-        poster: String!
+        image: String!
         link: String!
     }
 `);

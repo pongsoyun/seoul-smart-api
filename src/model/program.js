@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 export const Program = new Schema({
   title: String,
-  poster: String,
+  image: String,
   link: String,
 });
 
