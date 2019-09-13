@@ -84,6 +84,12 @@ async function applyActivity({ activityId, userId, comment }) {
   return activity;
 }
 
+async function cancelActivity({ activityId, userId }) {
+  const user = findUser(userId);
+  const activity = await Activity.findOneAndUpdate({ _id: activityId }, { $pull: { participants: { $elemMatch: { user }}}});
+  return activity;
+}
+
 async function getPrograms() {
   const programs = await Program.find();
   return programs;
@@ -103,6 +109,7 @@ const rootValue = {
   createActivity,
   modifyActivity,
   applyActivity,
+  cancelActivity,
   getPrograms,
   getProgram,
   getPlaces,
