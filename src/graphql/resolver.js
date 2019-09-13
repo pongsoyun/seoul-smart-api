@@ -105,6 +105,19 @@ async function changeActivity({ activityId, status }) {
   return activity;
 }
 
+async function extendActivity({ activityId, date, startTime, progressTime, placeId, room }) {
+  const place = findPlace(placeId);
+  const day = {
+    date,
+    startTime,
+    progressTime,
+    place,
+    room,
+  };
+  const activity = await Activity.findOneAndUpdate({ _id: activityId }, { $addToSet: { days: day }});
+  return activity;
+}
+
 async function getPrograms() {
   const programs = await Program.find();
   return programs;
@@ -128,6 +141,7 @@ const rootValue = {
   applyActivity,
   cancelActivity,
   changeActivity,
+  extendActivity,
   getPrograms,
   getProgram,
   getPlaces,
