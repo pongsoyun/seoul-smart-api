@@ -3,6 +3,11 @@ import Place from '../model/place';
 import Activity from '../model/activity';
 import Program from '../model/program';
 
+async function Users(){
+  const users = await User.find();
+  return users;
+}
+
 async function createUser({ name, token }) {
   const result = await User.create({ name, token });
   return result;
@@ -16,11 +21,6 @@ async function signIn({ token }) {
 async function findUser({ _id }) {
   const user = await User.findOne({ _id });
   return user;
-}
-
-async function Users( ){
-  const users = await User.find();
-  return users;
 }
 
 async function createActivity({
@@ -43,11 +43,6 @@ async function createActivity({
   return activity;
 }
 
-async function getActivities({ type }){
-    const activities = await Activity.find({ type });
-    return activities;
-  }
-
 async function getPrograms() {
   const programs = await Program.find();
   return programs;
@@ -64,7 +59,6 @@ const rootValue = {
   findUser,
   signIn,
   createActivity,
-  getActivities,
   getPrograms,
   getProgram,
 };
