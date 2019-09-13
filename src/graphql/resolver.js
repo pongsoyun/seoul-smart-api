@@ -95,6 +95,11 @@ async function cancelActivity({ activityId, userId }) {
   return activity;
 }
 
+async function changeActivity({ activityId, status }) {
+  const activity = await Activity.findOneAndUpdate({ _id: activityId }, { status });
+  return activity;
+}
+
 async function getPrograms() {
   const programs = await Program.find();
   return programs;
@@ -116,6 +121,7 @@ const rootValue = {
   deleteActivity,
   applyActivity,
   cancelActivity,
+  changeActivity,
   getPrograms,
   getProgram,
   getPlaces,
