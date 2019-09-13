@@ -23,11 +23,10 @@
     "graphql": "^14.5.4",
     "mongoose": "^5.6.13",
 
-    
     "babel-cli": "^6.26.0",
     "babel-node": "0.0.1-security",
     "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-3": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1"
   },
   "devDependencies": {
     "eslint": "^6.3.0",
