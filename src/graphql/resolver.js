@@ -23,6 +23,11 @@ async function findUser({ _id }) {
   return user;
 }
 
+async function findPlace({ _id }) {
+  const place = await Place.findOne({ _id });
+  return place;
+}
+
 async function getPlaces() {
   const places = await Place.find();
   return places;
@@ -33,7 +38,7 @@ async function createActivity({
   placeId, room, content, type,
 }) {
   const user = findUser(userId);
-  const place = await Place.findOne({ _id: placeId });
+  const place = findPlace(placeId);
   const day = {
     date,
     startTime,
@@ -53,7 +58,7 @@ async function modifyActivity({
   placeId, room, content, type,
 }) {
   const user = findUser(userId);
-  const place = await Place.findOne({ _id: placeId });
+  const place = findPlace(placeId);
   const day = {
     date,
     startTime,
@@ -82,6 +87,7 @@ const rootValue = {
   Users,
   createUser,
   findUser,
+  findPlace,
   signIn,
   createActivity,
   modifyActivity,
