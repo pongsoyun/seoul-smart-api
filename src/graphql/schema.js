@@ -20,6 +20,7 @@ export default buildSchema(`
         applyActivity(activityId: String!, userId: String!, comment: String!): Activity
         cancelActivity(activityId: String!, userId: String!): Activity
         changeActivity(activityId: String!, status: String!): Activity
+        extendActivity(activityId: String!, date: String!, startTime: String!, progressTime: String!, placeId: String!, room: String!): Activity
     }
 
     type User { 
@@ -51,19 +52,15 @@ export default buildSchema(`
         contact: String
     }
 
-    type Day {
-        date: String
-        startTime: String
-        progressTime: String
-    }
-
     type Participant {
         user: User
         comment: String
     }
 
-    type DayInfo {
-        day: Day
+    type Day {
+        date: String
+        startTime: String
+        progressTime: String
         place: Place
         room: String
     }
@@ -73,7 +70,7 @@ export default buildSchema(`
         leader: User
         participants: [Participant]
         total: Int
-        days: [DayInfo]
+        days: [Day]
         content: String
         type: String
         status: String
