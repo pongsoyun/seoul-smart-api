@@ -43,6 +43,26 @@ async function createActivity({
   return activity;
 }
 
+async function modifyActivity({
+  activityId, name, userId, total, date, startTime, progressTime,
+  placeId, room, content, type,
+}) {
+  const user = findUser(userId);
+  const place = await Place.findOne({ _id: placeId });
+  const day = {
+    date,
+    startTime,
+    progressTime,
+    place,
+    room,
+  };
+
+  const activity = await Activity.findOneAndUpdate({ _id: activityId }, {
+    name, leader: user, total, days: [day], content, type,
+  });
+  return activity;
+}
+
 async function getPrograms() {
   const programs = await Program.find();
   return programs;
@@ -59,6 +79,7 @@ const rootValue = {
   findUser,
   signIn,
   createActivity,
+  modifyActivity,
   getPrograms,
   getProgram,
 };
