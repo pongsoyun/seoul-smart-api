@@ -8,7 +8,7 @@ import rootValue from './graphql/resolver';
 const mongoURI = 'mongodb://seoulapi:seoulapi1@ds127802.mlab.com:27802/heroku_f5g0fz8g';
 
 mongoose.Promise = global.Promise;
-mongoose.connect(mongoURI, { useNewUrlParser: true }).then(() => {
+mongoose.connect(mongoURI, { useNewUrlParser: true, useFindAndModify: false }).then(() => {
   console.log('connnected to mongodb');
 }).catch((e) => {
   console.error(e);
