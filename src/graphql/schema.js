@@ -5,7 +5,6 @@ export default buildSchema(`
         Users: [User]
         findUser(_id: String!): User
         signIn(token: String!): User
-        getActivities(type: String!): [Activity]
         getPrograms: [Program]!
         getProgram(_id: String!): Program!
     }
