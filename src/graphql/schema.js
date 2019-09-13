@@ -4,6 +4,7 @@ export default buildSchema(`
     type Query {
         Users: [User]
         findUser(_id: String!): User
+        findPlace(_id:String!): Place
         signIn(token: String!): User
         getPrograms: [Program]!
         getProgram(_id: String!): Program!
