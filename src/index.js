@@ -18,8 +18,9 @@ const app = express();
 
 app.use(express.json());
 
-app.use('/', graphqlHTTP({
+app.get('/', (req, res) => res.json({success:true}));
 
+app.use('/graphql', graphqlHTTP({
   schema,
   rootValue,
   graphiql: true,
