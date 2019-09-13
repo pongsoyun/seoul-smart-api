@@ -7,6 +7,7 @@ const Room = new Schema({
   facility: String,
   visit: Number,
   equipments: [String],
+  description: String
 });
 
 const Location = new Schema({

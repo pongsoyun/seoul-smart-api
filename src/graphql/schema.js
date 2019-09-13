@@ -35,6 +35,7 @@ export default buildSchema(`
         facility: String!
         visit: Int
         equipments: [String]
+        description: String!
     }
 
     type Location {
