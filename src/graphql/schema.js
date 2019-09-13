@@ -18,6 +18,7 @@ export default buildSchema(`
         deleteActivity(activityId: String!): Activity
         applyActivity(activityId: String!, userId: String!, comment: String!): Activity
         cancelActivity(activityId: String!, userId: String!): Activity
+        changeActivity(activityId: String!, status: String!): Activity
     }
 
     type User { 
