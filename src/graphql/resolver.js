@@ -23,6 +23,12 @@ async function findUser({ _id }) {
   return user;
 }
 
+async function getPlaces() {
+  const places = await Place.find();
+  console.log(places);
+  return places;
+}
+
 async function createActivity({
   name, userId, total, date, startTime, progressTime,
   placeId, room, content, type,
@@ -82,6 +88,7 @@ const rootValue = {
   modifyActivity,
   getPrograms,
   getProgram,
+  getPlaces,
 };
 
 export default rootValue;
