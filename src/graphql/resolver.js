@@ -74,6 +74,11 @@ async function modifyActivity({
   return activity;
 }
 
+async function deleteActivity({ activityId }) {
+  const activity = await Activity.findOneAndDelete({ _id: activityId });
+  return activity;
+}
+
 async function applyActivity({ activityId, userId, comment }) {
   const user = findUser(userId);
   const participant = {
@@ -108,6 +113,7 @@ const rootValue = {
   signIn,
   createActivity,
   modifyActivity,
+  deleteActivity,
   applyActivity,
   cancelActivity,
   getPrograms,
