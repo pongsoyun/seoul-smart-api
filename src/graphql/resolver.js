@@ -25,7 +25,6 @@ async function findUser({ _id }) {
 
 async function getPlaces() {
   const places = await Place.find();
-  console.log(places);
   return places;
 }
 
