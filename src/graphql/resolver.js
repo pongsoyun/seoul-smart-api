@@ -14,6 +14,11 @@ async function createUser({ name, token }) {
   return result;
 }
 
+async function modifyUser({ userId, name }) {
+  const user = await User.findOneAndUpdate({ _id: userId }, { name });
+  return user;
+}
+
 async function signIn({ token }) {
   const user = await User.findOne({ token });
   return user;
@@ -113,6 +118,7 @@ async function getProgram({ _id }) {
 const rootValue = {
   Users,
   createUser,
+  modifyUser,
   findUser,
   findPlace,
   signIn,
