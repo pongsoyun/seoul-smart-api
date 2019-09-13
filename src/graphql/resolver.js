@@ -2,6 +2,7 @@ import User from '../model/user';
 import Place from '../model/place';
 import Activity from '../model/activity';
 import Program from '../model/program';
+import { join } from 'path';
 
 async function Users(){
   const users = await User.find();
@@ -68,6 +69,16 @@ async function modifyActivity({
   return activity;
 }
 
+async function applyActivity({ activityId, userId, comment }) {
+  const user = findUser(userId);
+  const participant = {
+    user,
+    comment,
+  }
+  const activity = await Activity.findOneAndUpdate({ _id: activityId }, { $addToSet: { participants: participant }});
+  return activity;
+}
+
 async function getPrograms() {
   const programs = await Program.find();
   return programs;
@@ -85,6 +96,7 @@ const rootValue = {
   signIn,
   createActivity,
   modifyActivity,
+  applyActivity,
   getPrograms,
   getProgram,
   getPlaces,
