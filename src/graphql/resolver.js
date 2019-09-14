@@ -33,13 +33,13 @@ async function findPlace({ _id }) {
   return place;
 }
 
-async function getPlaces({ page = 1, facility, gu }) {
+async function getPlaces({ page = 1, search, facility, gu }) {
   const limit = 5;
   const skip = (page-1)*limit;
-  if(!!!facility && !!!gu){
+  if(!!!search && !!!facility && !!!gu){
     return await Place.find().skip(skip).limit(limit);
   }
-  const places = await Place.find({ $or: [{ 'location.gu': gu }, { rooms: { $elemMatch: { facility }}}]}).skip(skip).limit(limit);
+  const places = await Place.find({ $or: [{ name: { $regex: search }}, { 'location.gu': gu }, { rooms: { $elemMatch: { facility }}}]}).skip(skip).limit(limit);
   return places;
 }
 

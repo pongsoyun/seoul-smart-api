@@ -8,7 +8,7 @@ export default buildSchema(`
         signIn(token: String!): User
         getPrograms: [Program]!
         getProgram(_id: String!): Program!
-        getPlaces(page: Int, facility: String, gu: String): [Place]
+        getPlaces(page: Int, search: String, facility: String, gu: String): [Place]
     }
 
     type Mutation {
