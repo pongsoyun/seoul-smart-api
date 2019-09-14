@@ -2,7 +2,6 @@ import User from '../model/user';
 import Place from '../model/place';
 import Activity from '../model/activity';
 import Program from '../model/program';
-import { join } from 'path';
 
 async function Users(){
   const users = await User.find();
@@ -34,8 +33,11 @@ async function findPlace({ _id }) {
   return place;
 }
 
-async function getPlaces() {
-  const places = await Place.find();
+async function getPlaces({ facility, gu }) {
+  if(!!!facility && !!!gu){
+    return await Place.find();
+  }
+  const places = await Place.find({ $or: [{ 'location.gu': gu }, { rooms: { $elemMatch: { facility }}}]});
   return places;
 }
 
