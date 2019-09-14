@@ -40,7 +40,7 @@ async function getPlaces() {
 }
 
 async function createActivity({
-  name, userId, total, date, startTime, progressTime,
+  name, userId, total, date, startTime, endTime,
   placeId, room, content, type,
 }) {
   const user = findUser(userId);
@@ -48,7 +48,7 @@ async function createActivity({
   const day = {
     date,
     startTime,
-    progressTime,
+    endTime,
     place,
     room,
   };
@@ -60,7 +60,7 @@ async function createActivity({
 }
 
 async function modifyActivity({
-  activityId, name, userId, total, date, startTime, progressTime,
+  activityId, name, userId, total, date, startTime, endTime,
   placeId, room, content, type,
 }) {
   const user = findUser(userId);
@@ -68,7 +68,7 @@ async function modifyActivity({
   const day = {
     date,
     startTime,
-    progressTime,
+    endTime,
     place,
     room,
   };
@@ -105,12 +105,12 @@ async function changeActivity({ activityId, status }) {
   return activity;
 }
 
-async function extendActivity({ activityId, date, startTime, progressTime, placeId, room }) {
+async function extendActivity({ activityId, date, startTime, endTime, placeId, room }) {
   const place = findPlace(placeId);
   const day = {
     date,
     startTime,
-    progressTime,
+    endTime,
     place,
     room,
   };
