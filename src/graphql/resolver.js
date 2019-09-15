@@ -67,7 +67,7 @@ async function getActivities({ page = 1, status}){
   const limit = 5;
   const skip = (page-1)*limit;
   if(!!!status){
-    return await Place.find().skip(skip).limit(limit);
+    return await Activity.find().skip(skip).limit(limit);
   }
   const activities = await Activity.find({'status' : status}).skip(skip).limit(limit);
   return activities;
