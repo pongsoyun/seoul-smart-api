@@ -1,32 +1,7 @@
-import User from '../../model/user';
+import { Users, createUser, modifyUser, signIn, findUser } from './user';
 import Place from '../../model/place';
 import Activity from '../../model/activity';
 import Program from '../../model/program';
-
-async function Users(){
-  const users = await User.find();
-  return users;
-}
-
-async function createUser({ name, token }) {
-  const result = await User.create({ name, token });
-  return result;
-}
-
-async function modifyUser({ userId, name }) {
-  const user = await User.findOneAndUpdate({ _id: userId }, { name });
-  return user;
-}
-
-async function signIn({ token }) {
-  const user = await User.findOne({ token });
-  return user;
-}
-
-async function findUser({ _id }) {
-  const user = await User.findOne({ _id });
-  return user;
-}
 
 async function findPlace({ _id }) {
   const place = await Place.findOne({ _id });
