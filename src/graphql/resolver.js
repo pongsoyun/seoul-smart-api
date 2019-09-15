@@ -69,7 +69,7 @@ async function getActivities({ page = 1, status}){
   if(!!!status){
     return await Activity.find().skip(skip).limit(limit);
   }
-  const activities = await Activity.find({'status' : status}).skip(skip).limit(limit);
+  const activities = await Activity.find({ 'status' : status }).skip(skip).limit(limit);
   return activities;
 }
 
