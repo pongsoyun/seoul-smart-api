@@ -1,22 +1,7 @@
 import { Users, createUser, modifyUser, signIn, findUser } from './user';
-import Place from '../../model/place';
+import { findPlace, getPlaces } from './place';
 import Activity from '../../model/activity';
 import { getPrograms, getProgram } from './program';
-
-async function findPlace({ _id }) {
-  const place = await Place.findOne({ _id });
-  return place;
-}
-
-async function getPlaces({ page = 1, search, facility, gu }) {
-  const limit = 5;
-  const skip = (page-1)*limit;
-  if(!!!search && !!!facility && !!!gu){
-    return await Place.find().skip(skip).limit(limit);
-  }
-  const places = await Place.find({ $or: [{ name: { $regex: search }}, { 'location.gu': gu }, { rooms: { $elemMatch: { facility }}}]}).skip(skip).limit(limit);
-  return places;
-}
 
 async function createActivity({
   name, userId, total, date, startTime, endTime,
