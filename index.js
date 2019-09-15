@@ -1,7 +1,7 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
 import { buildSchema } from 'graphql';
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 const app = express();
 // const mongoURI = 'mongodb+srv://herokuf5g0fz8g:HhiK5FAR38PG8@ds127802.mlab.com:27802/heroku_f5g0fz8g&w=1';
