@@ -63,6 +63,13 @@ async function createActivity({
   return activity;
 }
 
+async function getActivities({ page = 1}){
+  const limit = 5;
+  const skip = (page-1)*limit;
+  const activities = await Activity.find().sort({ status : -1 }).skip(skip).limit(limit);
+  return activities;
+}
+
 async function modifyActivity({
   activityId, name, userId, total, date, startTime, endTime,
   placeId, room, content, type,
@@ -140,6 +147,7 @@ const rootValue = {
   findPlace,
   signIn,
   createActivity,
+  getActivities,
   modifyActivity,
   deleteActivity,
   applyActivity,
