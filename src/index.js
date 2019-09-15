@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import schema from './graphql/schema';
 import rootValue from './graphql/resolver';
 
-
 const mongoURI = 'mongodb://seoulapi:seoulapi1@ds127802.mlab.com:27802/heroku_f5g0fz8g';
 
 mongoose.Promise = global.Promise;
@@ -19,7 +18,6 @@ const app = express();
 app.use(express.json());
 
 app.use('/', graphqlHTTP({
-
   schema,
   rootValue,
   graphiql: true,

@@ -1,7 +1,7 @@
-import User from '../model/user';
-import Place from '../model/place';
-import Activity from '../model/activity';
-import Program from '../model/program';
+import User from '../../model/user';
+import Place from '../../model/place';
+import Activity from '../../model/activity';
+import Program from '../../model/program';
 
 async function Users(){
   const users = await User.find();
