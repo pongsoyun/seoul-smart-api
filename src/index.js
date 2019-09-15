@@ -5,13 +5,8 @@ import mongoose from 'mongoose';
 import schema from './graphql/schema';
 import rootValue from './graphql/resolver';
 
-const {
-  PORT: port = 4000,
-  MONGO_URI: mongoURI
-} = process.env;
-
 mongoose.Promise = global.Promise;
-mongoose.connect(mongoURI, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false }).then(() => {
+mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false }).then(() => {
   console.log('connnected to mongodb');
 }).catch((e) => {
   console.error(e);
@@ -27,6 +22,6 @@ app.use('/', graphqlHTTP({
   graphiql: true,
 }));
 
-app.listen(port, () => {
+app.listen(process.env.PORT, () => {
   console.log('listening 4000 port...');
 });
