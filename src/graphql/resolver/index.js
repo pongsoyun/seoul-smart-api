@@ -1,7 +1,7 @@
 import { Users, createUser, modifyUser, signIn, findUser } from './user';
 import Place from '../../model/place';
 import Activity from '../../model/activity';
-import Program from '../../model/program';
+import { getPrograms, getProgram } from './program';
 
 async function findPlace({ _id }) {
   const place = await Place.findOne({ _id });
@@ -104,15 +104,6 @@ async function extendActivity({ activityId, date, startTime, endTime, placeId, r
   return activity;
 }
 
-async function getPrograms() {
-  const programs = await Program.find();
-  return programs;
-}
-
-async function getProgram({ _id }) {
-  const program = await Program.findOne({ _id });
-  return program;
-}
 
 const rootValue = {
   Users,
