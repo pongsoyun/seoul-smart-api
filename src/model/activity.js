@@ -18,7 +18,7 @@ const Activity = new Schema({
   }],
   content: String,
   type: { type: String, enum: ['mentoring', 'study', 'conference', 'networking', 'lifestyle'] },
-  status: { type: String, enum: ['recruit', 'deadline', 'progress', 'done'], default: 'recruit' },
+  status: { type: String, enum: ['recruit', 'pauserecruit', 'ongoing', 'done'], default: 'recruit' },
 });
 
 export default mongoose.model('activity', Activity);

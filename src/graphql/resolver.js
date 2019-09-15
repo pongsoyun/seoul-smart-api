@@ -63,13 +63,10 @@ async function createActivity({
   return activity;
 }
 
-async function getActivities({ page = 1, status}){
+async function getActivities({ page = 1}){
   const limit = 5;
   const skip = (page-1)*limit;
-  if(!!!status){
-    return await Activity.find().skip(skip).limit(limit);
-  }
-  const activities = await Activity.find({ 'status' : status }).skip(skip).limit(limit);
+  const activities = await Activity.find().sort({ 'status' : -1 }).skip(skip).limit(limit);
   return activities;
 }
 
