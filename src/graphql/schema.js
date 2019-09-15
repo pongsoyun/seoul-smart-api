@@ -36,6 +36,7 @@ export default buildSchema(`
         visit: Int
         equipments: [String]
         description: String!
+        thumbnail: String
     }
 
     type Location {
