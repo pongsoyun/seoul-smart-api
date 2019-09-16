@@ -4,7 +4,7 @@ export async function findPlace({ _id }) {
   return await Place.findOne({ _id });
 }
   
-export async function getPlaces({ page = 1, search, facility, gu }) {
+export async function getPlaces({ page = 1, search = "", facility, gu }) {
   const limit = 5;
   const skip = (page-1)*limit;
   if(!!!search && !!!facility && !!!gu){
