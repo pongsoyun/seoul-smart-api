@@ -84,7 +84,7 @@ export async function applyActivity({ activityId, userId, comment }) {
 }
   
 export async function cancelActivity({ activityId, userId }) {
-  await deleteLog({ _id: userId, activityId });
+  deleteLog({ _id: userId, activityId });
   return await Activity.findOneAndUpdate({ _id: activityId }, { $pull: { participants: { $elemMatch: { userId }}}});
 }
   

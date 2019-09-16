@@ -1,4 +1,5 @@
 import User from '../../model/user';
+import { findActivity } from './activity';
 
 export async function Users() {
     return await User.find();
@@ -20,7 +21,8 @@ export async function findUser({ _id }) {
   return await User.findOne({ _id });
 }
 
-export async function addLog({ _id, activity }) {
+export async function addLog({ _id, activityId }) {
+  const activity = await findActivity({ _id: activityId });
   return await User.findOneAndUpdate({ _id }, { $addToSet: { activityLog: activity }});
 }
 
