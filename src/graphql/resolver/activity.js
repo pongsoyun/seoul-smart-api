@@ -1,5 +1,5 @@
 import Activity from '../../model/activity';
-import { findUser } from './user';
+import { findUser, addLog, deleteLog } from './user';
 import { findPlace } from './place';
 
 export async function createActivity({
@@ -30,6 +30,10 @@ export async function getActivities({ page = 1, type }){
   }
   const activities = await Activity.find({ type }).sort({ status : -1 }).skip(skip).limit(limit);
   return activities;
+}
+
+export async function findActivity({ _id }) {
+  return await Activity.find({ _id });
 }
   
 export async function modifyActivity({
