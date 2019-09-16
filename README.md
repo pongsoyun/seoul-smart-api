@@ -158,7 +158,36 @@ mutation{
 
 ### Activity - Activity 마감하기(개설자)
 ```
-🔥modifyActivity 사용..? 🔥
+mutation{
+  changeActivity(activityId, status){
+    name
+    leader{
+      name
+      tokenachievement 
+      activityLog
+    }
+    participants{
+      user{
+        name
+        token
+        achievement
+        activityLog
+      }
+      comment
+    }
+    total
+    days{
+      date
+      startTime
+      endTime
+      place
+      room
+    }
+    content
+    type
+    status
+  }
+}
 ```
 
 ### Activity - Activity 삭제하기(개설자)
@@ -280,6 +309,40 @@ query{
 ```
 
 ### Activity - 활동 상태 변경하기(개발자)
+```
+mutation{
+  changeActivity(activityId, status){
+    name
+    leader{
+      name
+      tokenachievement 
+      activityLog
+    }
+    participants{
+      user{
+        name
+        token
+        achievement
+        activityLog
+      }
+      comment
+    }
+    total
+    days{
+      date
+      startTime
+      endTime
+      place
+      room
+    }
+    content
+    type
+    status
+  }
+}
+```
+
+Activity - 활동 종료하기(개설자)
 ```
 mutation{
   changeActivity(activityId, status){
