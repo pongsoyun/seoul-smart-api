@@ -21,5 +21,9 @@ export async function findUser({ _id }) {
 }
 
 export async function addLog({ _id, activity }) {
-  return await User.findOneAndUpdate({ _id }, { $addToSet: { activityLogs: activity }});
+  return await User.findOneAndUpdate({ _id }, { $addToSet: { activityLog: activity }});
+}
+
+export async function deleteLog({ _id, activity }) {
+  return await User.findOneAndUpdate({ _id }, { $pull: { activityLog: activity }});
 }
