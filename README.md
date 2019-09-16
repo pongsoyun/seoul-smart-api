@@ -40,13 +40,56 @@ mutation{
 ### findUser
 ```
 query{
-	findUser(_id){
+  findUser(_id) {
+    id
     name
     token
-    achievement
-    activityLog
+		achievement
+    activityLog{
+      activityId
+      name
+      leader{
+        userId
+        name
+      }
+      participants{
+        userId
+        name
+      }
+      total
+      days{
+        date
+        startTime
+        endTime
+        place{
+          id
+          name
+          rooms{
+            name
+            facility
+            equipments
+            description
+            thumbnail
+          }
+          location{
+            address
+            gu
+          }
+          businessHour
+          bookLink
+          thumbnail
+          contact
+        }
+        room
+      }
+      content
+      type
+      status
+    }
   }
 }
+
+
 ```
 
 ### 로그인
@@ -137,7 +180,45 @@ mutation{
     name
     token
     achievement
-    activityLog
+    activityLog{
+      activityId
+      name
+      leader
+      participants{
+        userId
+        name
+        comment
+      }
+      total
+      days{
+        date
+        startTime
+        endTime
+        place{
+          id
+          name
+          rooms{
+            name
+            facility
+            equipments
+            description
+            thumbnail
+          }
+          location{
+            address
+            gu
+          }
+          businessHour
+          bookLink
+          thumbnail
+          contact
+        }
+        room
+      }
+      content
+      type
+      status
+    }
   }
 }
 ```
@@ -151,7 +232,45 @@ mutation{
     name
     token
     achievement
-    activityLog
+    activityLog{
+      activityId
+      name
+      leader
+      participants{
+        userId
+        name
+        comment
+      }
+      total
+      days{
+        date
+        startTime
+        endTime
+        place{
+          id
+          name
+          rooms{
+            name
+            facility
+            equipments
+            description
+            thumbnail
+          }
+          location{
+            address
+            gu
+          }
+          businessHour
+          bookLink
+          thumbnail
+          contact
+        }
+        room
+      }
+      content
+      type
+      status
+    }
   }
 }
 ```
@@ -165,7 +284,45 @@ mutation{
     name
     token
     achievement
-    activityLog
+    activityLog{
+      activityId
+      name
+      leader
+      participants{
+        userId
+        name
+        comment
+      }
+      total
+      days{
+        date
+        startTime
+        endTime
+        place{
+          id
+          name
+          rooms{
+            name
+            facility
+            equipments
+            description
+            thumbnail
+          }
+          location{
+            address
+            gu
+          }
+          businessHour
+          bookLink
+          thumbnail
+          contact
+        }
+        room
+      }
+      content
+      type
+      status
+    }
   }
 }
 ```
@@ -309,8 +466,46 @@ mutation{
 ```
 
 ### Activity - Activity 마감하기(개설자)
+: status == done 이 되게 해줘야함.
 ```
-
+mutation{
+  changeActivity(activityId, status){
+    name
+    leader{
+      userId
+      name
+    }
+    participants{
+      userId
+      name
+      comment
+    }
+    total
+    days{
+      date
+      startTime
+      endTime
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+      }
+      room
+    }
+    content
+    type
+    status
+  }
+}
 ```
 
 ### Activity - Activity 삭제하기(개설자)
