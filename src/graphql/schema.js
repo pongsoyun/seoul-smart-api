@@ -32,8 +32,20 @@ export default buildSchema(`
         id: ID!
         name: String!
         token: String!
-        achievement: Int
-        activityLog: [String]
+        achievement: Int!
+        activityLog: [ActivityLog]!
+    }
+
+    type ActivityLog {
+        activityId: String!
+        name: String!
+        leader: Leader!
+        participants: [Participant]!
+        total: Int!
+        days: [Day!]!
+        content: String!
+        type: String!
+        status: String!
     }
     
     type Room {
