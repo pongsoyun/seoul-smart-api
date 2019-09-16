@@ -9,7 +9,7 @@ export default buildSchema(`
         getPrograms: [Program]!
         getProgram(_id: String!): Program!
         getPlaces(page: Int, search: String, facility: String, gu: String): [Place]
-        getActivities(page: Int): [Activity]
+        getActivities(page: Int, type: String): [Activity]
     }
 
     type Mutation {
