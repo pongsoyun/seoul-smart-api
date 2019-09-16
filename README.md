@@ -127,6 +127,48 @@ query{
 ---
 ## Activity
  : 앱 유저(개인)가 개설한 모든 활동
+### addLog
+: User에 activityLog 추가를 위한 function
+```
+mutation{
+  addLog(_id, activityId){
+    id
+    name
+    token
+    achievement
+    activityLog
+  }
+}
+```
+
+### deleteLog
+: User에 activityLog 삭제를 위한 function
+```
+mutation{
+  deleteLog(_id, activityId){
+    id
+    name
+    token
+    achievement
+    activityLog
+  }
+}
+```
+
+### achieve
+: User의 달성률 계산을 위한 function
+```
+mutation{
+  achieve(_id, achievement){
+    id
+    name
+    token
+    achievement
+    activityLog
+  }
+}
+```
+
 ### findActivity
 ```
 query{
