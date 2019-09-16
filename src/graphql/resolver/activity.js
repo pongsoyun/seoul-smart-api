@@ -58,7 +58,7 @@ export async function modifyActivity({
   
 export async function deleteActivity({ activityId }) {
   const activity = await findActivity({ _id: activityId });
-  activity.participants.forEach(({ _id }) => await deleteLog({ _id, activity }));
+  activity.participants.forEach(({ _id }) => deleteLog({ _id, activity }));
   return await Activity.findOneAndDelete({ _id: activityId });
 }
   
@@ -73,10 +73,8 @@ export async function applyActivity({ activityId, userId, comment }) {
 }
   
 export async function cancelActivity({ activityId, userId }) {
-  const activity = await findActivity({ _id: activityId });
-  const user = await deleteLog({ _id: userId, activity });
-  const activity = await Activity.findOneAndUpdate({ _id: activityId }, { $pull: { participants: { $elemMatch: { user }}}});
-  return activity;
+  const user = await deleteLog({ _id: userId, activityId });
+  return await Activity.findOneAndUpdate({ _id: activityId }, { $pull: { participants: { $elemMatch: { user }}}});
 }
   
 export async function changeActivity({ activityId, status }) {

@@ -24,6 +24,6 @@ export async function addLog({ _id, activity }) {
   return await User.findOneAndUpdate({ _id }, { $addToSet: { activityLog: activity }});
 }
 
-export async function deleteLog({ _id, activity }) {
-  return await User.findOneAndUpdate({ _id }, { $pull: { activityLog: activity }});
+export async function deleteLog({ _id, activityId }) {
+  return await User.findOneAndUpdate({ _id }, { $pull: { activityLog: { $elemMatch: { _id: activityId } } }});
 }
