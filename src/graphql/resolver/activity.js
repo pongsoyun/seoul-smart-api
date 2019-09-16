@@ -1,4 +1,6 @@
 import Activity from '../../model/activity';
+import { findUser } from './user';
+import { findPlace } from './place';
 
 export async function createActivity({
   name, userId, total, date, startTime, endTime,
