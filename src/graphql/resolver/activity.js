@@ -57,11 +57,14 @@ export async function modifyActivity({
 }
   
 export async function deleteActivity({ activityId }) {
+  const activity = await findActivity({ _id: activityId });
+  activity.participants.forEach(({ _id }) => await deleteLog({ _id, activity }));
   return await Activity.findOneAndDelete({ _id: activityId });
 }
   
 export async function applyActivity({ activityId, userId, comment }) {
-  const user = await findUser({ _id: userId });
+  const activity = await findActivity({ _id: activityId });
+  const user = await addLog({ _id: userId, activity });
   const participant = {
     user,
     comment,
@@ -70,7 +73,8 @@ export async function applyActivity({ activityId, userId, comment }) {
 }
   
 export async function cancelActivity({ activityId, userId }) {
-  const user = await findUser({ _id: userId });
+  const activity = await findActivity({ _id: activityId });
+  const user = await deleteLog({ _id: userId, activity });
   const activity = await Activity.findOneAndUpdate({ _id: activityId }, { $pull: { participants: { $elemMatch: { user }}}});
   return activity;
 }
