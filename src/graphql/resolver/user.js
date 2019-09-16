@@ -22,12 +22,23 @@ export async function findUser({ _id }) {
 }
 
 export async function addLog({ _id, activityId }) {
-  const activity = await findActivity({ _id: activityId });
+  const { name, leader, participants, total, days, content, type, status } = await findActivity({ _id: activityId });
+  const activity = {
+    activityId,
+    name,
+    leader,
+    participants,
+    total,
+    days,
+    content,
+    type, 
+    status,
+  }
   return await User.findOneAndUpdate({ _id }, { $addToSet: { activityLog: activity }});
 }
 
 export async function deleteLog({ _id, activityId }) {
-  return await User.findOneAndUpdate({ _id }, { $pull: { activityLog: { $elemMatch: { _id: activityId } } }});
+  return await User.findOneAndUpdate({ _id }, { $pull: { activityLog: { $elemMatch: { activityId } } }});
 }
 
 export async function achieve({ _id, achievement }) {
