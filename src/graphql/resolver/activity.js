@@ -93,7 +93,7 @@ export async function changeActivity({ activityId, status }) {
     const activity = await findActivity({ _id: activityId });
     const achievement = (activity.participants.length + 20) * activity.days.length;
     activity.participants.forEach(({ _id }) => achieve({ _id, achievement }));
-    achieve({ _id: activity.leader._id, achivement: achievement + 30});
+    achieve({ _id: activity.leader._id, achievement: achievement + 30});
   }
   return await Activity.findOneAndUpdate({ _id: activityId }, { status });
 }
