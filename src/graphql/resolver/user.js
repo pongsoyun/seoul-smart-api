@@ -19,3 +19,7 @@ export async function signIn({ token }) {
 export async function findUser({ _id }) {
   return await User.findOne({ _id });
 }
+
+export async function addLog({ _id, activity }) {
+  return await User.findOneAndUpdate({ _id }, { $addToSet: { activityLogs: activity }});
+}
