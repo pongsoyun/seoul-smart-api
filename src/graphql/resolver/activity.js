@@ -38,7 +38,7 @@ export async function getActivities({ page = 1, type }){
 }
 
 export async function findActivity({ _id }) {
-  return await Activity.find({ _id });
+  return await Activity.findOne({ _id });
 }
   
 export async function modifyActivity({
