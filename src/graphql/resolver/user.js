@@ -27,3 +27,7 @@ export async function addLog({ _id, activity }) {
 export async function deleteLog({ _id, activityId }) {
   return await User.findOneAndUpdate({ _id }, { $pull: { activityLog: { $elemMatch: { _id: activityId } } }});
 }
+
+export async function achieve({ _id, achievement }) {
+  return await User.findOneAndUpdate({ _id }, { $inc : { achievement }});
+}
