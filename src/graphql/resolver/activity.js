@@ -6,7 +6,10 @@ export async function createActivity({
   name, userId, total, date, startTime, endTime,
   placeId, room, content, type,
 }) {
-  const user = await findUser({ _id: userId });
+  const leader = {
+    userId: _id,
+    name,
+  } = await findUser({ _id: userId });
   const place = await findPlace({ _id: placeId });
   const day = {
     date,
@@ -17,7 +20,7 @@ export async function createActivity({
   };
 
   const activity = await Activity.create({
-    name, leader: user, total, days: [day], content, type,
+    name, leader, total, days: [day], content, type,
   });
   return activity;
 }
@@ -40,7 +43,10 @@ export async function modifyActivity({
   activityId, name, userId, total, date, startTime, endTime,
   placeId, room, content, type,
 }) {
-  const user = await findUser({ _id: userId });
+  const leader = {
+    userId: _id,
+    name,
+  } = await findUser({ _id: userId });
   const place = await findPlace({ _id: placeId });
   const day = {
     date,
@@ -51,7 +57,7 @@ export async function modifyActivity({
   };
   
   const activity = await Activity.findOneAndUpdate({ _id: activityId }, {
-    name, leader: user, total, days: [day], content, type,
+    name, leader, total, days: [day], content, type,
   });
   return activity;
 }
@@ -64,17 +70,17 @@ export async function deleteActivity({ activityId }) {
   
 export async function applyActivity({ activityId, userId, comment }) {
   const activity = await findActivity({ _id: activityId });
-  const user = await addLog({ _id: userId, activity });
   const participant = {
-    user,
+    userId: _id,
+    name,
     comment,
-  }
+  } = await addLog({ _id: userId, activity });
   return await Activity.findOneAndUpdate({ _id: activityId }, { $addToSet: { participants: participant }});
 }
   
 export async function cancelActivity({ activityId, userId }) {
-  const user = await deleteLog({ _id: userId, activityId });
-  return await Activity.findOneAndUpdate({ _id: activityId }, { $pull: { participants: { $elemMatch: { user }}}});
+  await deleteLog({ _id: userId, activityId });
+  return await Activity.findOneAndUpdate({ _id: activityId }, { $pull: { participants: { $elemMatch: { userId }}}});
 }
   
 export async function changeActivity({ activityId, status }) {
