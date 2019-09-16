@@ -3,14 +3,14 @@ import { buildSchema } from 'graphql';
 export default buildSchema(`
     type Query {
         Users: [User]
-        findUser(_id: String!): User
-        findPlace(_id:String!): Place
+        findUser(_id: String!): User!
+        findPlace(_id:String!): Place!
         signIn(token: String!): User
         getPrograms: [Program]!
         getProgram(_id: String!): Program!
         getPlaces(page: Int, search: String, facility: String, gu: String): [Place]
         getActivities(page: Int, type: String): [Activity]
-        findActivity(_id: String!): Activity
+        findActivity(_id: String!): Activity!
     }
 
     type Mutation {
@@ -24,7 +24,8 @@ export default buildSchema(`
         changeActivity(activityId: String!, status: String!): Activity
         extendActivity(activityId: String!, date: String!, startTime: String!, endTime: String!, placeId: String!, room: String!): Activity
         addLog(_id: String!, activityId: String!): User
-        deleteLog(_id: String!, activity: Activity): User
+        deleteLog(_id: String!, activityId: String!): User
+        achieve(_id: String!, achievement: Int!): User
     }
 
     type User { 
