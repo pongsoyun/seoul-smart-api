@@ -15,7 +15,7 @@ export default buildSchema(`
     type Mutation {
         createUser(name: String!, token: String!): User
         modifyUser(userId: String!, name: String!): User
-        createActivity(name: String!, userId: String!, total: Int!, date: String, startTime: String, endTime: String, placeId: String, room: String, content: String, type: String): Activity
+        createActivity(name: String!, userId: String!, total: Int!, date: String, startTime: String, endTime: String, placeId: String!, room: String, content: String, type: String): Activity
         modifyActivity(activityId: String!, name: String!, userId: String!, total: Int!, date: String, startTime: String, endTime: String, placeId: String, room: String, content: String, type: String): Activity
         deleteActivity(activityId: String!): Activity
         applyActivity(activityId: String!, userId: String!, comment: String!): Activity
