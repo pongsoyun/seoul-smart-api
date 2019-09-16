@@ -126,7 +126,8 @@ query{
 
 ---
 ## Activity
- : 앱 유저(개인)가 개설한 모든 활동
+ : Activity의sataus가recruit(모집중),pauserecruit(모집마감),ongoing(진행중),done(활동완료)순서대로정렬되어표현
+
 ### addLog
 : User에 activityLog 추가를 위한 function
 ```
@@ -170,6 +171,7 @@ mutation{
 ```
 
 ### findActivity
+: id값의 활동을 find
 ```
 query{
   findActivity(_id){
