@@ -6,8 +6,8 @@ export async function createActivity({
   name, userId, total, date, startTime, endTime,
   placeId, room, content, type,
 }) {
-  const user = await findUser(userId);
-  const place = await findPlace(placeId);
+  const user = await findUser({ _id: userId });
+  const place = await findPlace({ _id: placeId });
   const day = {
     date,
     startTime,
@@ -36,8 +36,8 @@ export async function modifyActivity({
   activityId, name, userId, total, date, startTime, endTime,
   placeId, room, content, type,
 }) {
-  const user = await findUser(userId);
-  const place = await findPlace(placeId);
+  const user = await findUser({ _id: userId });
+  const place = await findPlace({ _id: placeId });
   const day = {
     date,
     startTime,
@@ -57,7 +57,7 @@ export async function deleteActivity({ activityId }) {
 }
   
 export async function applyActivity({ activityId, userId, comment }) {
-  const user = await findUser(userId);
+  const user = await findUser({ _id: userId });
   const participant = {
     user,
     comment,
@@ -66,7 +66,7 @@ export async function applyActivity({ activityId, userId, comment }) {
 }
   
 export async function cancelActivity({ activityId, userId }) {
-  const user = await findUser(userId);
+  const user = await findUser({ _id: userId });
   const activity = await Activity.findOneAndUpdate({ _id: activityId }, { $pull: { participants: { $elemMatch: { user }}}});
   return activity;
 }
@@ -77,7 +77,7 @@ export async function changeActivity({ activityId, status }) {
 }
   
 export async function extendActivity({ activityId, date, startTime, endTime, placeId, room }) {
-  const place = await findPlace(placeId);
+  const place = await findPlace({ _id: placeId });
   const day = {
     date,
     startTime,
