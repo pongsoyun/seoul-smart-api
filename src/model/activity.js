@@ -1,13 +1,12 @@
 import mongoose from 'mongoose';
-import { User } from './user';
 import { Place } from './place';
 
 const { Schema } = mongoose;
 
 const Activity = new Schema({
   name: String,
-  leader: User,
-  participants: { type: [{ user: User, comment: String }], default: [] },
+  leader: new Schema({ userId: String, name: String }),
+  participants: { type: [{ userId: String, name: String, comment: String }], default: [] },
   total: Number,
   days: [{ 
     date: String,
