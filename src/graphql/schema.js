@@ -29,6 +29,7 @@ export default buildSchema(`
     }
 
     type User { 
+        id: ID!
         name: String!
         token: String!
         achievement: Int
@@ -49,6 +50,7 @@ export default buildSchema(`
     }
 
     type Place {
+        id: ID!
         name: String!
         rooms: [Room]!
         location: Location!
@@ -78,6 +80,7 @@ export default buildSchema(`
     }
 
     type Activity {
+        id: ID!
         name: String!
         leader: Leader!
         participants: [Participant]!
