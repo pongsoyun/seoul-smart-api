@@ -10,6 +10,7 @@ export default buildSchema(`
         getProgram(_id: String!): Program!
         getPlaces(page: Int, search: String, facility: String, gu: String): [Place]
         getActivities(page: Int, type: String): [Activity]
+        findActivity(_id: String!): Activity
     }
 
     type Mutation {
@@ -22,6 +23,8 @@ export default buildSchema(`
         cancelActivity(activityId: String!, userId: String!): Activity
         changeActivity(activityId: String!, status: String!): Activity
         extendActivity(activityId: String!, date: String!, startTime: String!, endTime: String!, placeId: String!, room: String!): Activity
+        addLog(_id: String!, activityId: String!): User
+        deleteLog(_id: String!, activity: Activity): User
     }
 
     type User { 

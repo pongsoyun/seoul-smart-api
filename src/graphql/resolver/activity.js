@@ -68,7 +68,7 @@ export async function modifyActivity({
   
 export async function deleteActivity({ activityId }) {
   const activity = await findActivity({ _id: activityId });
-  activity.participants.forEach(({ _id }) => deleteLog({ _id, activity }));
+  activity.participants.forEach(({ _id }) => deleteLog({ _id, activityId }));
   return await Activity.findOneAndDelete({ _id: activityId });
 }
   
