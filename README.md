@@ -244,7 +244,7 @@ mutation{
 
 ### Activity - 모든 Activity 보기
 : Activity의 sataus가 recruit(모집중), pauserecruit(모집마감), ongoing(진행중), done(활동완료) 순서대로 정렬되어 표현
-
+🔥여기도 필터가 되어있지 않음..🔥
 ```
 query{
   getActivities(page){
