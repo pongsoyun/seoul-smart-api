@@ -22,10 +22,10 @@ export async function createActivity({
   return activity;
 }
   
-export async function getActivities({ page = 1}){
+export async function getActivities({ page = 1, type }){
   const limit = 5;
   const skip = (page-1)*limit;
-  const activities = await Activity.find().sort({ status : -1 }).skip(skip).limit(limit);
+  const activities = await Activity.find({ 'type' : type }).sort({ status : -1 }).skip(skip).limit(limit);
   return activities;
 }
   
