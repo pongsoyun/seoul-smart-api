@@ -24,6 +24,7 @@ export async function createActivity({
   const activity = await Activity.create({
     name, leader, total, days: [day], content, type,
   });
+  await addLog({ _id: userId, activityId: activity._id });
   return activity;
 }
   
@@ -73,8 +74,7 @@ export async function deleteActivity({ activityId }) {
 }
   
 export async function applyActivity({ activityId, userId, comment }) {
-  const activity = await findActivity({ _id: activityId });
-  const user = await addLog({ _id: userId, activity });
+  const user = await addLog({ _id: userId, activityId });
   const participant = {
     userId: user._id,
     name: user.name,
