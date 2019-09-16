@@ -3,12 +3,6 @@
 
 http://seoul-smart-api.herokuapp.com
 
-# equipments
-pc, printer, tv, whiteBoard, mic, headphone, coffeeMachine, microwave, induction, sink, kitchenTools, piano, projector, instrument, game, book
-
-# facility
-오픈공간, 회의실, 세미나룸, 녹음실, 부엌, 스터디룸, 연습실, 극장
-
 ---
 # GraphQL Query, Mutation
 ## 회원가입 및 개인정보
@@ -38,11 +32,6 @@ mutation{
 }
 ```
 
-### 개인정보 - Activity 내역 확인
-```
-🔥따로 구현된 함수 없음🔥
-```
-
 ### 로그인
 ```
 query{
@@ -58,7 +47,12 @@ query{
 
 ### 필터 적용하여 장소 보여주기 
 Filter : 시설, 위치, 일시
+> # facility
+> 오픈공간, 회의실, 세미나룸, 녹음실, 부엌, 스터디룸, 연습실, 극장
+
 ### Place - Filter(시설)
+> # equipments
+> pc, printer, tv, whiteBoard, mic, headphone, coffeeMachine, microwave, induction, sink, kitchenTools, piano, projector, instrument, game, book
 ```
 query{
   getPlaces(page, search, gu, facility){
@@ -75,7 +69,7 @@ query{
       address
       gu
     }
-		businessHour
+    businessHour
     bookLink
     thumbnail
     contact
@@ -271,12 +265,11 @@ mutation{
 }
 ```
 
-### Activity - 모든 Activity 보기
+### Activity - type filter 적용하여 모든 Activity 보기
 : Activity의 sataus가 recruit(모집중), pauserecruit(모집마감), ongoing(진행중), done(활동완료) 순서대로 정렬되어 표현
-🔥여기도 필터가 되어있지 않음..🔥
 ```
 query{
-  getActivities(page){
+  getActivities(page, type){
     name
     leader{
       name
@@ -425,9 +418,7 @@ query{
 }
 ```
 
-### Program - filter 적용하여 모든 Program 보기
-Filter: 멘토링, 스터디, 컨퍼런스, 네트워킹, 라이프스타일
-🔥필터가 없습니다🔥
+### Program - 모든 Program 보기
 ```
 query{
 	getProgram(_id){
