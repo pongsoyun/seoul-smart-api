@@ -3,6 +3,12 @@
 
 http://seoul-smart-api.herokuapp.com
 
+# equipments
+pc, printer, tv, whiteBoard, mic, headphone, coffeeMachine, microwave, induction, sink, kitchenTools, piano, projector, instrument, game, book
+
+# facility
+오픈공간, 회의실, 세미나룸, 녹음실, 부엌, 스터디룸, 연습실, 극장
+
 ---
 # GraphQL Query, Mutation
 ## 회원가입 및 개인정보
@@ -10,7 +16,6 @@ http://seoul-smart-api.herokuapp.com
 ```
 mutation{
   createUser(name, token){
-    _id
     name
     token
     achievement
@@ -32,11 +37,28 @@ mutation{
 }
 ```
 
-### 로그인
+### findUser
 ```
 query{
+	findUser(_id){
+    name
+    token
+    achievement
+    activityLog
+  }
+}
+```
+
+### 로그인
+```
+//🔥token이 아니라, id, token 모두 들어와야하지않을까요...
+query{
+  query{
   signIn(token){
     name
+    token
+    achievement
+    activityLog
   }
 }
 ```
@@ -47,20 +69,45 @@ query{
 
 ### 필터 적용하여 장소 보여주기 
 Filter : 시설, 위치, 일시
-> # facility
-> 오픈공간, 회의실, 세미나룸, 녹음실, 부엌, 스터디룸, 연습실, 극장
+>#facility
+>오픈공간,회의실,세미나룸,녹음실,부엌,스터디룸,연습실,극장
 
-### Place - Filter(시설)
-> # equipments
-> pc, printer, tv, whiteBoard, mic, headphone, coffeeMachine, microwave, induction, sink, kitchenTools, piano, projector, instrument, game, book
+### Place - findPlace
 ```
 query{
-  getPlaces(page, search, gu, facility){
+  findPlace(_id){
     name
     rooms{
       name
       facility
-      visit
+      equipments
+      description
+      thumbnail
+    }
+    location{
+      address
+      gu
+    }
+    businessHour
+    bookLink
+    thumbnail
+    contact
+  }
+}
+```
+
+
+### Place - Filter(시설)
+>#equipments
+>pc,printer,tv,whiteBoard,mic,headphone,coffeeMachine,microwave,induction,sink,kitchenTools,piano,projector,instrument,game,book
+
+```
+query{
+  getPlaces(page, search, facility, gu){
+    name
+    rooms{
+      name
+      facility
       equipments
       description
       thumbnail
@@ -80,24 +127,18 @@ query{
 ---
 ## Activity
  : 앱 유저(개인)가 개설한 모든 활동
-### Activity - Activity 개설하기(개설자)
+### findActivity
 ```
-mutation{
-  createActivity(name, userId, total, date, startTime, endTime, placeId, room, content, type){
+query{
+  findActivity(_id){
     name
     leader{
+      userId
       name
-      token
-      achievement
-      activityLog
     }
     participants{
-      user{
-        name
-        token
-        achievement
-        activityLog
-      }
+      userId
+      name
       comment
     }
     total
@@ -105,7 +146,69 @@ mutation{
       date
       startTime
       endTime
-      place
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        location{
+          address
+          gu
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+      }
+      room
+    }
+    content
+    type
+    status
+  }
+}
+```
+### Activity - Activity 개설하기(개설자)
+```
+mutation{
+  createActivity(name, userId, total, date, startTime, endTime, placeId, room, content, type){
+    name
+    leader{
+      userId
+      name
+    }
+    participants{
+      userId
+      name
+      comment
+    }
+    total
+    days{
+      date
+      startTime
+      endTime
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        location{
+          address
+          gu
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+      }
       room
     }
     content
@@ -119,20 +222,14 @@ mutation{
 ```
 mutation{
   applyActivity(activityId, userId, comment){
-		name
+    name
     leader{
+      userId
       name
-      token
-      achievement
-      activityLog
     }
     participants{
-      user{
-        name
-        token
-        achievement
-        activityLog
-      }
+      userId
+      name
       comment
     }
     total
@@ -140,7 +237,24 @@ mutation{
       date
       startTime
       endTime
-      place
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        location{
+          address
+          gu
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+      }
       room
     }
     content
@@ -152,55 +266,21 @@ mutation{
 
 ### Activity - Activity 마감하기(개설자)
 ```
-mutation{
-  changeActivity(activityId, status){
-    name
-    leader{
-      name
-      tokenachievement 
-      activityLog
-    }
-    participants{
-      user{
-        name
-        token
-        achievement
-        activityLog
-      }
-      comment
-    }
-    total
-    days{
-      date
-      startTime
-      endTime
-      place
-      room
-    }
-    content
-    type
-    status
-  }
-}
+
 ```
 
 ### Activity - Activity 삭제하기(개설자)
 ```
 mutation{
-	deleteActivity(activityId){
+  deleteActivity(activityId){
     name
     leader{
+      userId
       name
-      tokenachievement 
-      activityLog
     }
     participants{
-      user{
-        name
-        token
-        achievement
-        activityLog
-      }
+      userId
+      name
       comment
     }
     total
@@ -208,7 +288,20 @@ mutation{
       date
       startTime
       endTime
-      place
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+      }
       room
     }
     content
@@ -224,17 +317,12 @@ mutation{
   cancelActivity(activityId, userId){
     name
     leader{
+      userId
       name
-      tokenachievement 
-      activityLog
     }
     participants{
-      user{
-        name
-        token
-        achievement
-        activityLog
-      }
+      userId
+      name
       comment
     }
     total
@@ -242,7 +330,24 @@ mutation{
       date
       startTime
       endTime
-      place
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        location{
+          address
+          gu
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+      }
       room
     }
     content
@@ -255,12 +360,41 @@ mutation{
 ### Activity - Activity 수정하기
 ```
 mutation{
-  modifyActivity(activityId, name, userId, total){
+  modifyActivity(activityId, name, userId, total, date, startTime, endTime, placeId, room, content, type){
     name
+    leader{
+      userId
+      name
+    }
+    participants{
+      userId
+      name
+      comment
+    }
     total
-    date
-    placeId
-    room
+    days{
+      date
+      startTime
+      endTime
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+      }
+      room
+    }
+    content
+    type
+    status
   }
 }
 ```
@@ -272,18 +406,12 @@ query{
   getActivities(page, type){
     name
     leader{
+      userId
       name
-      token
-      achievement
-      activityLog
     }
     participants{
-      user{
-        name
-        token
-        achievement
-        activityLog
-      }
+      userId
+      name
       comment
     }
     total
@@ -307,17 +435,12 @@ mutation{
   changeActivity(activityId, status){
     name
     leader{
+      userId
       name
-      tokenachievement 
-      activityLog
     }
     participants{
-      user{
-        name
-        token
-        achievement
-        activityLog
-      }
+      userId
+      name
       comment
     }
     total
@@ -325,7 +448,20 @@ mutation{
       date
       startTime
       endTime
-      place
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+      }
       room
     }
     content
@@ -341,17 +477,12 @@ mutation{
   changeActivity(activityId, status){
     name
     leader{
+      userId
       name
-      tokenachievement 
-      activityLog
     }
     participants{
-      user{
-        name
-        token
-        achievement
-        activityLog
-      }
+      userId
+      name
       comment
     }
     total
@@ -359,7 +490,21 @@ mutation{
       date
       startTime
       endTime
-      place
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+
+      }
       room
     }
     content
@@ -376,17 +521,12 @@ mutation{
   extendActivity(activityId, date, startTime, endTime, placeId, room){
     name
     leader{
+      userId
       name
-      tokenachievement 
-      activityLog
     }
     participants{
-      user{
-        name
-        token
-        achievement
-        activityLog
-      }
+      userId
+      name
       comment
     }
     total
@@ -394,7 +534,20 @@ mutation{
       date
       startTime
       endTime
-      place
+      place{
+        name
+        rooms{
+          name
+          facility
+          equipments
+          description
+          thumbnail
+        }
+        businessHour
+        bookLink
+        thumbnail
+        contact
+      }
       room
     }
     content
@@ -410,10 +563,10 @@ mutation{
 ### Program - 모든 Program 보기
 ```
 query{
-	getPrograms{
-    title
-    image
-    link
+    getPrograms{
+        title
+        image
+        link
   }
 }
 ```
@@ -421,10 +574,12 @@ query{
 ### Program - 모든 Program 보기
 ```
 query{
-	getProgram(_id){
-    title
-    image
-    link
+    getProgram(_id){
+        title
+        image
+        link
   }
 }
 ```
+
+
