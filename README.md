@@ -1,13 +1,7 @@
-# 개발] README
+# README
 ## seoul-smart-api
 
 http://seoul-smart-api.herokuapp.com
-
-# equipments
-pc, printer, tv, whiteBoard, mic, headphone, coffeeMachine, microwave, induction, sink, kitchenTools, piano, projector, instrument, game, book
-
-# facility
-오픈공간, 회의실, 세미나룸, 녹음실, 부엌, 스터디룸, 연습실, 극장
 
 ---
 # GraphQL Query, Mutation
@@ -31,6 +25,8 @@ query{
   }
 }
 ```
+
+---
 
 ## 메인페이지 - 메인
 1. 메인페이지 - 메인
@@ -98,26 +94,31 @@ query{
 ## 장소페이지
 1. 장소페이지  - 메인
 : 장소명, 상세주소, 사진 보여주기
+: parameter에 filter(바로 아래 2번 참고)에서 choice한 속성이 들어감
+```
+query{
+  getPlaces(page, search, facility, gu){
+    name
+    rooms{
+      name
+      thumbnail
+    }
+    location{
+      address
+      gu
+    } 
+  }
+}
 ```
 
-```
 
-2. 장소페이지 - 필터(시설, 위치) 선택 페이지
-### 시설, 위치 필터
-> 시설 : 오픈공간, 회의실, 세미나룸, 녹음실, 부엌, 스터디룸, 연습실, 극장
-> 위치 : 강북구, 강서구, 양천구, 동작구 등…
-```
-
-```
-
-3. 장소 페이지 - 장소 선택시 보여지는 장소 상세페이지
+2. 장소 페이지 - 장소 선택시 보여지는 장소 상세페이지
 : 사진, 장소명(공간 전체 이름 ex. 무중력지대 G밸리), 상세주소, 장소설명, 시설 아이콘, 링크
-🔥db에는 운영시간이랑 연락처 다 적혀있는데 와이어프레ㅁ에는 없네여 그래서 일단 리드미쿼리에도 뻈습니다
 > 기자재 종류
 > pc, printer, tv, whiteBoard, mic, headphone, coffeeMachine, microwave, induction, sink, kitchenTools, piano, projector, instrument, game, book
 ```
 query{
-  findPlace(_id: "5d7e28d3e7179a084efd7136"){
+  findPlace(_id){
     name
     rooms{
       name
@@ -130,7 +131,10 @@ query{
       address
       gu
     }
+    businessHour
     bookLink
+    thumbnail
+    contact
   }
 }
 
@@ -177,7 +181,6 @@ query{
 ### 개설페이지
 : `1. 활동페이지 - 개인` 의 floating 되어있는 `+` button의 event
 : 활동 이름, 장소, 일시, 인원, 내용 입력, 활동유형 선택 후 확인버튼press -> 개설페이지로 돌아감
-🙌🏻{$활동이름}을 성공적으로 개설했습니다!
 ```
 mutation{
   createActivity(name, userId, total, date, startTime, endTime, placeId, room, content, type){
@@ -187,20 +190,7 @@ mutation{
 ```
 
 ### 개설페이지 - 장소 선택 [ 장소페이지와 동일 ]
-- 검색창
-```
-
-```
-- 필터 - 시설
- : 오픈공간, 회의실, 세미나룸, 녹음실, 부엌, 스터디룸, 연습실, 극장
-```
-
-```
-- 필터 - 위치
- : 강북구, 강서구, 양천구, 동작구 등…
-```
-
-```
+🎶
 
 3. 활동페이지 - 활동설명페이지
 ```
