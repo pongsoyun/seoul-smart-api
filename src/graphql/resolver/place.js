@@ -7,7 +7,7 @@ export async function findPlace({ _id }) {
 export async function getPlaces({ page = 1, search="undefined", facility, gu }) {
   const limit = 5;
   const skip = (page-1)*limit;
-  if(!!!search && !!!facility && !!!gu){
+  if(search==="undefined" && !!!facility && !!!gu){
     return await Place.find().skip(skip).limit(limit);
   }
   const places = await Place.find({ $or: [{ name: { $regex: search }}, { 'location.gu': gu }, { rooms: { $elemMatch: { facility }}}]}).skip(skip).limit(limit);
