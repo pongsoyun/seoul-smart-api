@@ -89,11 +89,11 @@ export async function cancelActivity({ activityId, userId }) {
 }
   
 export async function changeActivity({ activityId, status }) {
-  if(status === "done") {
+  if(status === 'done') {
     const activity = await findActivity({ _id: activityId });
     const achievement = (activity.participants.length + 20) * activity.days.length;
-    activity.participants.forEach(({ _id }) => achieve({ _id, achievement }));
-    achieve({ _id: activity.leader._id, achievement: achievement + 30});
+    activity.participants.forEach(({ userId }) => achieve({ _id: userId, achievement }));
+    achieve({ _id: activity.leader.userId, achievement: achievement + 30});
   }
   return await Activity.findOneAndUpdate({ _id: activityId }, { status });
 }
