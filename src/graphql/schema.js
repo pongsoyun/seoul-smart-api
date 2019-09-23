@@ -16,13 +16,13 @@ export default buildSchema(`
     type Mutation {
         createUser(name: String!, token: String!): User
         modifyUser(userId: String!, name: String!): User
-        createActivity(name: String!, userId: String!, total: Int!, date: String!, startTime: String!, endTime: String!, placeId: String!, room: String!, content: String!, type: String!): Activity
-        modifyActivity(activityId: String!, name: String!, userId: String!, total: Int!, date: String!, startTime: String!, endTime: String!, placeId: String!, room: String!, content: String!, type: String!): Activity
+        createActivity(name: String!, userId: String!, total: Int!, date: String!, startTime: String!, endTime: String!, place: String!, room: String!, content: String!, type: String!): Activity
+        modifyActivity(activityId: String!, name: String!, userId: String!, total: Int!, date: String!, startTime: String!, endTime: String!, place: String!, room: String!, content: String!, type: String!): Activity
         deleteActivity(activityId: String!): Activity
         applyActivity(activityId: String!, userId: String!, comment: String!): Activity
         cancelActivity(activityId: String!, userId: String!): Activity
         changeActivity(activityId: String!, status: String!): Activity
-        extendActivity(activityId: String!, date: String!, startTime: String!, endTime: String!, placeId: String!, room: String!): Activity
+        extendActivity(activityId: String!, date: String!, startTime: String!, endTime: String!, place: String!, room: String!): Activity
         addLog(_id: String!, activityId: String!): User
         deleteLog(_id: String!, activityId: String!): User
         achieve(_id: String!, achievement: Int!): User
@@ -82,7 +82,7 @@ export default buildSchema(`
         date: String!
         startTime: String!
         endTime: String!
-        place: Place!
+        place: String!
         room: String!
     }
 
