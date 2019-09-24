@@ -40,7 +40,7 @@ export async function createActivity({
 }
 
 export async function getActivities({ page = 1, type }) {
-  const limit = 5;
+  const limit = 10;
   const skip = (page - 1) * limit;
   if (!!!type) {
     return await Activity.find()
