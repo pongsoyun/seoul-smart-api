@@ -1,5 +1,6 @@
 import User from "../../model/user";
 import { findActivity } from "./activity";
+import mongoose from "mongoose";
 
 export async function Users() {
   return await User.find();
@@ -24,17 +25,16 @@ export async function findUser({ _id }) {
 
 export async function changeStatus({ _id, activityId, status }) {
   const { activityLog } = await findUser({ _id });
-  const activity = activityLog.find(value => value.activityId === activityId);
-  activity.status = status;
 
-  await User.findOneAndUpdate(
-    { _id },
-    { $pull: { activityLog: { activityId } } }
-  );
-  return await User.findOneAndUpdate(
-    { _id },
-    { $addToSet: { activityLog: activity } }
-  );
+  const newActivityLog = activityLog.map(value => {
+    if (value.activityId == activityId) {
+      value.status = status;
+      return value;
+    }
+    return value;
+  });
+
+  return await User.findOneAndUpdate({ _id }, { activityLog: newActivityLog });
 }
 
 export async function addLog({ _id, activityId }) {
