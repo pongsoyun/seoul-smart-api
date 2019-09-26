@@ -138,6 +138,7 @@ export async function changeActivity({ activityId, status }) {
     achieve({ _id: activity.leader.userId, achievement: achievement + 30 });
   }
   changeStatus({ _id: activity.leader.userId, activityId, status });
+
   activity.participants.forEach(participant => {
     changeStatus({ _id: participant.userId, activityId, status });
   });
