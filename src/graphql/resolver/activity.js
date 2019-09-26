@@ -1,5 +1,5 @@
 import Activity from "../../model/activity";
-import { findUser, addLog, deleteLog, achieve } from "./user";
+import { findUser, addLog, deleteLog, achieve, changeStatus } from "./user";
 
 export async function createActivity({
   name,
@@ -128,8 +128,8 @@ export async function cancelActivity({ activityId, userId }) {
 }
 
 export async function changeActivity({ activityId, status }) {
+  const activity = await findActivity({ _id: activityId });
   if (status === "done") {
-    const activity = await findActivity({ _id: activityId });
     const achievement =
       (activity.participants.length + 20) * activity.days.length;
     activity.participants.forEach(({ userId }) =>
@@ -137,6 +137,9 @@ export async function changeActivity({ activityId, status }) {
     );
     achieve({ _id: activity.leader.userId, achievement: achievement + 30 });
   }
+  activity.participants.forEach(participant => {
+    changeStatus({ _id: participant.userId, activityId, status });
+  });
   return await Activity.findOneAndUpdate({ _id: activityId }, { status });
 }
 

@@ -22,6 +22,21 @@ export async function findUser({ _id }) {
   return await User.findOne({ _id });
 }
 
+export async function changeStatus({ _id, activityId, status }) {
+  const { activityLog } = await findUser({ _id });
+  const activity = activityLog.find(value => value.activityId === activityId);
+  activity.status = status;
+
+  await User.findOneAndUpdate(
+    { _id },
+    { $pull: { activityLog: { activityId } } }
+  );
+  return await User.findOneAndUpdate(
+    { _id },
+    { $addToSet: { activityLog: activity } }
+  );
+}
+
 export async function addLog({ _id, activityId }) {
   const {
     name,
