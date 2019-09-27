@@ -7,8 +7,11 @@ export async function Users() {
 }
 
 export async function createUser({ name, token }) {
-  const a = await User.create({ name, token });
-  return a;
+  const user = signIn({ token });
+  if (user) {
+    return user;
+  }
+  return await User.create({ name, token });
 }
 
 export async function modifyUser({ userId, name }) {
